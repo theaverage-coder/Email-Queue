@@ -1,0 +1,19 @@
+{
+  "name": "email-queue-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@bull-board/api": "^7.0.0",
+    "@bull-board/express": "^7.0.0",
+    "bull": "^4.16.5",
+    "express": "^5.2.1",
+    "ioredis": "^5.10.1"
+  }
+}

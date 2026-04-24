@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+
+  worker:
+    build: .
+    command: node worker/worker.js
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
