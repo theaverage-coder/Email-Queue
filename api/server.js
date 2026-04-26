@@ -31,6 +31,31 @@ app.post("/send-email", async (req, res) => {
     res.json({ message: "Added email to queue." });
 });
 
+// endpoint to get status of a job/email
+app.get("/get-status/:id", async (req, res) => {
+    const jobId = req.params.id;
+
+    // find job
+    const job = await emailQueue.getJob(jobId);
+
+    // return error if no job found
+    if (!job) {
+        return res.status(404).json({ error: "Job not found" });
+    }
+
+    const state = job.getState();
+
+    // return job
+    res.json({
+        id: jobId,
+        state,
+        data: job.data
+    });
+})
+
+
+
+
 const serverAdapter = new ExpressAdapter();
 serverAdapter.setBasePath('/admin/queues');
 
