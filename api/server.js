@@ -19,7 +19,6 @@ app.post("/send-email", async (req, res) => {
             subject,
             body,
         }, {
-        //jobId: `email-${Date.now()}`, // create an unique ID for the email job
         delay: 5000, // wait 5 seconds before processing email
         attempts: 3, // retry up to 3 times
         backoff: {
@@ -31,7 +30,7 @@ app.post("/send-email", async (req, res) => {
     res.json({ message: "Added email to queue." });
 });
 
-// endpoint to get status of a job/email
+// endpoint to get status of an email job
 app.get("/get-status/:id", async (req, res) => {
     const jobId = req.params.id;
 
@@ -48,7 +47,10 @@ app.get("/get-status/:id", async (req, res) => {
     // return job
     res.json({
         id: jobId,
+        type: job.name,
         state,
+        attempts: job.attemptsMade,
+        failedReason: job.failedReason,
         data: job.data
     });
 })
