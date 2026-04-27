@@ -19,7 +19,7 @@ app.post("/send-email", async (req, res) => {
             subject,
             body,
         }, {
-        jobId: `email-${Date.now()}`, // create an unique ID for the email job
+        //jobId: `email-${Date.now()}`, // create an unique ID for the email job
         delay: 5000, // wait 5 seconds before processing email
         attempts: 3, // retry up to 3 times
         backoff: {
@@ -53,6 +53,15 @@ app.get("/get-status/:id", async (req, res) => {
     });
 })
 
+app.get("/get-logs", async (req, res) => {
+    const counts = await emailQueue.getJobCounts('wait', 'completed', 'failed');
+
+    res.json({
+        wait: `${counts.wait} jobs waiting`,
+        completed: `${counts.completed} jobs completed`,
+        failed: `${counts.failed} jobs failed`
+    })
+})
 
 
 

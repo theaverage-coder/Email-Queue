@@ -1,7 +1,7 @@
 const emailQueue = require("../queue/queue");
 
 // process jobs
-emailQueue.process(async (job) => {
+emailQueue.process("send-email", async (job) => {
     const { to, subject, body } = job.data;
 
     console.log("Processing email request...");
