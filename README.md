@@ -17,7 +17,14 @@ By decoupling task execution from the request lifecycle, the system achieves bet
 
 Flow:
 Client -> API -> Redis Queue -> Worker -> Task Execution
-
+```mermaid
+graph LR
+A[Client] --> B[API Server]
+B --> C[Redis Queue]
+C --> D[Worker]
+D --> E[Task Execution]
+C --> F[Dashboard]
+```
 
 ## Features
 - Asynchronous job processing

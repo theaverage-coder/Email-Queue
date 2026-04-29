@@ -75,9 +75,8 @@ createBullBoard({
     serverAdapter,
 });
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT);
 
-app.listen(3000, () => {
-    console.log("API running on http://localhost:3000");
-});
 
 app.use('/admin/queues', serverAdapter.getRouter());
