@@ -5,12 +5,18 @@ services:
     build: .
     ports:
       - "3000:3000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     depends_on:
       - redis
 
   worker:
     build: .
     command: node worker/worker.js
+    environment: 
+    - REDIS_HOST=redis 
+    - REDIS_PORT=6379
     depends_on:
       - redis
 
